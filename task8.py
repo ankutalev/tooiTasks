@@ -9,21 +9,18 @@ class Human:
 class Murderer:
     name: str = "Razor"
 
-    def __init__(self, name:str):
+    def __init__(self, name: str):
         self.name = name
 
-    def kill(self,hum:Human):
-        hum.status = "killed by "+ self.name
+    def kill(self, hum: Human):
+        hum.status = "killed by " + self.name
 
 
-zubenko: Human = Human()
-zubenko.isDead()
+man: Human = Human()
+man.isDead()
 killer: Murderer = Murderer("Razor")
-killer.kill(zubenko)
-zubenko.isDead()
+killer.kill(man)
+man.isDead()
 killer1: Murderer = Murderer("Slave")
-killer1.kill(zubenko)
-zubenko.isDead()
-
-# второе задание я нихуя не понял что блять значит загрузите опенсорсору используя оопэ? ало нахуй
-
+killer1.kill(man)
+man.isDead()

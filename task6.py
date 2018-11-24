@@ -10,6 +10,7 @@ counter = collections.Counter()
 bigrams_counter = collections.Counter()
 avito_rows = []
 
+
 def calculate_info(list_of_words, max_length, longest_word):
     i = 0
     while i < len(list_of_words) - 1:
@@ -33,11 +34,11 @@ def print_info_and_cleanup(task_name):
 
 def print_info(task_name):
     print("Most common in" + task_name, counter.most_common(20))
-    print("Least common in "+ task_name, counter.most_common()[:-20:-1])
-    print("Longest word in "+ task_name, longest_word)
-    print("Most common bigram in " +task_name, bigrams_counter.most_common(1))
-    print("All words in avito "+ task_name, sum(counter.values()))
-    print("Unique words in "+ task_name+"\n", len(list(counter)))
+    print("Least common in " + task_name, counter.most_common()[:-20:-1])
+    print("Longest word in " + task_name, longest_word)
+    print("Most common bigram in " + task_name, bigrams_counter.most_common(1))
+    print("All words in avito " + task_name, sum(counter.values()))
+    print("Unique words in " + task_name + "\n", len(list(counter)))
 
 
 def compare_adverts(a, b):
@@ -51,7 +52,7 @@ with open('stage3_test.csv', newline='') as csvfile:
         if startCheck != 0:
             avito_rows.append(row)
             words = row[2].split(" ")
-            calculate_info(words,max_length,longest_word)
+            calculate_info(words, max_length, longest_word)
         startCheck = 1
     print_info_and_cleanup(" avito:")
 
@@ -61,14 +62,8 @@ with open('RomeoAndJuliet.json') as f:
         for scenes in acts['scenes']:
             for actions in scenes['action']:
                 for phrase in actions['says']:
-                    calculate_info(phrase.split(" "),max_length,longest_word)
+                    calculate_info(phrase.split(" "), max_length, longest_word)
     print_info_and_cleanup("romeo and juliet: ")
-
-
-avito_rows.sort(key=cmp_to_key(compare_adverts))
-print("AVITO SORTED")
-for row in avito_rows:
-    print("Header: ",row[2], "Cost: ",row[len(row)-1])
 
 tree = ET.parse('annot.opcorpora.no_ambig.xml')
 root = tree.getroot()
@@ -77,11 +72,10 @@ for child in root.findall('text'):
     for paragraph in paragraphs:
         sentences = paragraph.findall('sentence')
         for sentence in sentences:
-            calculate_info(sentence.find('source').text.split(" "),max_length,longest_word)
+            calculate_info(sentence.find('source').text.split(" "), max_length, longest_word)
 print_info_and_cleanup("xml: ")
 
-
-
-
-
-
+avito_rows.sort(key=cmp_to_key(compare_adverts))
+print("AVITO SORTED")
+for row in avito_rows:
+    print("Header: ", row[2], "Cost: ", row[len(row) - 1])
