@@ -70,15 +70,15 @@ print("AVITO SORTED")
 for row in avito_rows:
     print("Header: ",row[2], "Cost: ",row[len(row)-1])
 
-# tree = ET.parse('annot.opcorpora.no_ambig.xml')
-# root = tree.getroot()
-# for child in root.findall('text'):
-#     paragraphs = child.find('paragraphs')
-#     for paragraph in paragraphs:
-#         sentences = paragraph.findall('sentence')
-#         for sentence in sentences:
-#             calculate_info(sentence.find('source').text.split(" "),max_length,longest_word)
-# print_info_and_cleanup("xml: ")
+tree = ET.parse('annot.opcorpora.no_ambig.xml')
+root = tree.getroot()
+for child in root.findall('text'):
+    paragraphs = child.find('paragraphs')
+    for paragraph in paragraphs:
+        sentences = paragraph.findall('sentence')
+        for sentence in sentences:
+            calculate_info(sentence.find('source').text.split(" "),max_length,longest_word)
+print_info_and_cleanup("xml: ")
 
 
 
